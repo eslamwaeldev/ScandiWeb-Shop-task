@@ -5,7 +5,7 @@ export class Modal extends Component {
     return (
       this.props.modal && (
         <div id="myModal" className="modal" onClick={this.props.closeModal}>
-          <div class="modal-content">
+          <div className="modal-content">
             <h4 className="cart-title">
               <span className="my-bag">My Bag, </span> 3items
             </h4>
