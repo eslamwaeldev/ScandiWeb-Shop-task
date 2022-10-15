@@ -6,9 +6,9 @@ export class CategoryName extends Component {
       <>
         <div className="category-component">
           <h1>
-            {this.props.isWomen ? "Women" : null}
-            {this.props.isMen ? "Men" : null}
-            {this.props.isKids ? "Kids" : null}
+            {this.props.isAll ? "All" : null}
+            {this.props.isTech ? "Tech" : null}
+            {this.props.isClothes ? "Clothes" : null}
           </h1>
         </div>
       </>
