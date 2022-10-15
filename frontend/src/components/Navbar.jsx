@@ -4,7 +4,6 @@ import styled from "styled-components";
 import NavLink from "./NavLink";
 import Logo from "./Logo";
 import CartIcon from "./CartIcon";
-import Modal from "./Modal";
 
 const Nav = styled.nav`
   display: flex;
@@ -19,51 +18,85 @@ const Nav = styled.nav`
 `;
 
 export class Navbar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      modal: false,
-    };
-    this.controlModal = this.controlModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-  }
-  controlModal() {
-    this.setState({
-      modal: !this.state.modal,
-    });
-  }
-  closeModal(e) {
-    console.log(e);
-    if (e.target.id === "myModal") {
-      this.setState({
-        modal: false,
-      });
-    }
-  }
   render() {
     return (
       <>
         <Nav>
           <div className="nav-label-container">
-            <NavLink link="Women" Selected={this.props.isWomen} setSelected={this.props.handleWomen} />
-            <NavLink link="Men" Selected={this.props.isMen} setSelected={this.props.handleMen} />
-            <NavLink link="Kids" Selected={this.props.isKids} setSelected={this.props.handleKids} />
+            <NavLink link="All Items" Selected={this.props.isAll} setSelected={this.props.handleAll} />
+            <NavLink link="Tech" Selected={this.props.isTech} setSelected={this.props.handleTech} />
+            <NavLink link="Clothes" Selected={this.props.isClothes} setSelected={this.props.handleClothes} />
           </div>
           <Logo />
           <div className="nav-icon-container">
             <div className="currency">
-              <label>$</label>
-              <select></select>
+              {/* <select name="currency" className="select">
+                <option>$ USD</option>
+                <option>£ EUR</option>
+                <option>¥ JPY</option>
+              </select> */}
+              {this.props.isUSD && <label>$</label>}
+              {this.props.isEUR && <label>£</label>}
+              {this.props.isJPY && <label>¥</label>}
+              <button id="currency" className="nav-label currency-btn" onClick={this.props.handleCurrency}>
+                <svg
+                  onClick={this.props.handleCurrency}
+                  id="down-arrow"
+                  width="8"
+                  height="4"
+                  viewBox="0 0 8 4"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    onClick={this.props.handleCurrency}
+                    id="down-arrow-path"
+                    d="M1 0.5L4 3.5L7 0.5"
+                    stroke="black"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+              {this.props.currencyClicked && (
+                <div className="options-menu">
+                  <button
+                    className="option nav-label"
+                    onClick={async () => {
+                      await this.props.handleUSD();
+                      this.props.handleCurrency();
+                    }}
+                  >
+                    $ USD
+                  </button>
+                  <button
+                    className="option nav-label"
+                    onClick={async () => {
+                      await this.props.handleEUR();
+                      this.props.handleCurrency();
+                    }}
+                  >
+                    £ EUR
+                  </button>
+                  <button
+                    className="option nav-label"
+                    onClick={async () => {
+                      await this.props.handleJPY();
+                      this.props.handleCurrency();
+                    }}
+                  >
+                    ¥ JPY
+                  </button>
+                </div>
+              )}
             </div>
             <div className="cart">
-              <button className="nav-label" onClick={this.controlModal}>
+              <button className="nav-label" onClick={this.props.controlModal}>
                 <CartIcon />
               </button>
             </div>
           </div>
         </Nav>
-        <Modal modal={this.state.modal} closeModal={this.closeModal} />
       </>
     );
   }
