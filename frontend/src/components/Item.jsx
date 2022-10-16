@@ -25,18 +25,21 @@ export default class Item extends Component {
   render() {
     return (
       <div
-        className={`grid-item ${this.state.isChosen && "hover"}`}
+        className={`grid-item ${this.props.inStock && this.state.isChosen && "hover"} ${
+          this.props.inStock ? null : "not-in-stock"
+        }`}
         onMouseEnter={this.handleMouseIn}
         onMouseLeave={this.handleMouseOut}
       >
         <div>
+          {this.props.inStock ? null : <p className="not-in-stock-text">OUT OF STOCK</p>}
           <img className="item-img" alt="item" src={this.props.img} />
           <p className="item title">{this.props.title}</p>
           <p className="item item-price">
             <span>{this.props.currency}</span> {this.props.price}
           </p>
         </div>
-        {this.state.isChosen ? (
+        {this.props.inStock && this.state.isChosen ? (
           <div className="cart-overlay">
             <button className="cart-btn" onClick={this.addToCart}>
               <img className="cart-img" alt="cart" src={require("../assets/Common.png")} />
