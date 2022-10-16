@@ -17,6 +17,7 @@ export const FIND_ALL_ITEMS = gql`
         id
         name
         gallery
+        inStock
         prices {
           amount
           currency {
@@ -31,7 +32,6 @@ export const FIND_ALL_ITEMS = gql`
 export const FIND_PRODUCT = gql`
   query product($product: String!) {
     product(id: $product) {
-      id
       name
       inStock
       gallery
