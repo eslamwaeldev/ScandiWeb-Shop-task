@@ -12,7 +12,6 @@ export default class AllItems extends Component {
         <Query query={FIND_ALL_ITEMS} variables={{ title: all }}>
           {({ loading, error, data }) => {
             if (loading) return "Loading...";
-            console.log(data.category.products);
             if (error) return <h1>Error!..</h1>;
             return (
               <>
@@ -26,6 +25,7 @@ export default class AllItems extends Component {
                         price={product.prices[currency].amount}
                         currency={product.prices[currency].currency.symbol}
                         img={product.gallery[0]}
+                        inStock={product.inStock}
                       />
                     );
                   })}
