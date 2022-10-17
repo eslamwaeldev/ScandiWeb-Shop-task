@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import CartItem from "./CartItem";
 
 export class Modal extends Component {
   render() {
@@ -9,7 +10,12 @@ export class Modal extends Component {
             <h4 className="cart-title">
               <span className="my-bag">My Bag, </span> 3items
             </h4>
-            <div className="cart-items"></div>
+            <div className="cart-items">
+              <CartItem />
+              <CartItem />
+              <CartItem />
+              <CartItem />
+            </div>
             <div className="price">
               <p className="total-text">Total</p>
               <p className="amount">$200</p>
