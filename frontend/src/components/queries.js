@@ -32,18 +32,26 @@ export const FIND_ALL_ITEMS = gql`
 export const FIND_PRODUCT = gql`
   query product($product: String!) {
     product(id: $product) {
+      category
       name
-      inStock
       gallery
       description
+      prices {
+        currency {
+          symbol
+        }
+        amount
+      }
       attributes {
         type
+        name
         id
         items {
           value
+          id
+          displayValue
         }
       }
-      brand
     }
   }
 `;
