@@ -5,7 +5,6 @@ import Navbar from "./Navbar";
 import AllItems from "./AllItems";
 import TechItems from "./TechItems";
 import ClothesItems from "./ClothesItems";
-import Modal from "./Modal";
 
 export class Home extends Component {
   constructor(props) {
@@ -19,6 +18,7 @@ export class Home extends Component {
       isJPY: false,
       currencyClicked: false,
       modal: false,
+      itemsIDs: [],
     };
     this.handleUSDSelected = this.handleUSDSelected.bind(this);
     this.handleEURSelected = this.handleEURSelected.bind(this);
@@ -29,6 +29,15 @@ export class Home extends Component {
     this.controlModal = this.controlModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
     this.handleCurrencyClicked = this.handleCurrencyClicked.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+  }
+  addToCart(id) {
+    console.log("🚀 ~ file: Home.jsx ~ line 35 ~ Home ~ addToCart ~ id", id);
+    this.setState({
+      ...this.state,
+      itemsIDs: this.state.itemsIDs.concat([id]),
+    });
+    console.log("🚀 ~ file: Home.jsx ~ line 39 ~ Home ~ addToCart ~ itemsIDs", this.state.itemsIDs);
   }
   handleUSDSelected() {
     this.setState({
@@ -120,13 +129,38 @@ export class Home extends Component {
             handleJPY={this.handleJPYSelected}
             currencyClicked={this.state.currencyClicked}
             handleCurrency={this.handleCurrencyClicked}
+            modal={this.state.modal}
+            closeModal={this.closeModal}
+            USD={this.state.isUSD}
+            EUR={this.state.isEUR}
+            JPY={this.state.isJPY}
+            itemsIDs={this.state.itemsIDs}
           />
-          <Modal modal={this.state.modal} closeModal={this.closeModal} />
+
           <CategoryName isAll={this.state.isAll} isTech={this.state.isTech} isClothes={this.state.isClothes} />
-          {this.state.isAll && <AllItems USD={this.state.isUSD} EUR={this.state.isEUR} JPY={this.state.isJPY} />}
-          {this.state.isTech && <TechItems USD={this.state.isUSD} EUR={this.state.isEUR} JPY={this.state.isJPY} />}
+          {this.state.isAll && (
+            <AllItems
+              USD={this.state.isUSD}
+              EUR={this.state.isEUR}
+              JPY={this.state.isJPY}
+              addToCart={this.addToCart}
+            />
+          )}
+          {this.state.isTech && (
+            <TechItems
+              USD={this.state.isUSD}
+              EUR={this.state.isEUR}
+              JPY={this.state.isJPY}
+              addToCart={this.addToCart}
+            />
+          )}
           {this.state.isClothes && (
-            <ClothesItems USD={this.state.isUSD} EUR={this.state.isEUR} JPY={this.state.isJPY} />
+            <ClothesItems
+              USD={this.state.isUSD}
+              EUR={this.state.isEUR}
+              JPY={this.state.isJPY}
+              addToCart={this.addToCart}
+            />
           )}
         </div>
       </>
