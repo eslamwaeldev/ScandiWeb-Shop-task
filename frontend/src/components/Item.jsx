@@ -6,11 +6,9 @@ export default class Item extends Component {
 
     this.state = {
       isChosen: false,
-      id: this.props.id,
     };
     this.handleMouseIn = this.handleMouseIn.bind(this);
     this.handleMouseOut = this.handleMouseOut.bind(this);
-    this.addToCart = this.addToCart.bind(this);
   }
   handleMouseIn() {
     this.setState({ ...this.state, isChosen: true });
@@ -18,10 +16,7 @@ export default class Item extends Component {
   handleMouseOut() {
     this.setState({ ...this.state, isChosen: false });
   }
-  addToCart() {
-    console.log("clicked");
-    console.log(this.state.id);
-  }
+
   render() {
     return (
       <div
@@ -41,7 +36,12 @@ export default class Item extends Component {
         </div>
         {this.props.inStock && this.state.isChosen ? (
           <div className="cart-overlay">
-            <button className="cart-btn" onClick={this.addToCart}>
+            <button
+              className="cart-btn"
+              onClick={() => {
+                this.props.addToCart(this.props.id);
+              }}
+            >
               <img className="cart-img" alt="cart" src={require("../assets/Common.png")} />
             </button>
           </div>
