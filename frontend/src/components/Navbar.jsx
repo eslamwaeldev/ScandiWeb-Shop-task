@@ -4,6 +4,7 @@ import styled from "styled-components";
 import NavLink from "./NavLink";
 import Logo from "./Logo";
 import CartIcon from "./CartIcon";
+import Modal from "./Modal";
 
 const Nav = styled.nav`
   display: flex;
@@ -18,6 +19,13 @@ const Nav = styled.nav`
 `;
 
 export class Navbar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currency: this.props.USD ? 0 : this.props.EUR ? 1 : this.props.JPY ? 3 : 0,
+    };
+  }
   render() {
     return (
       <>
@@ -30,11 +38,6 @@ export class Navbar extends Component {
           <Logo />
           <div className="nav-icon-container">
             <div className="currency">
-              {/* <select name="currency" className="select">
-                <option>$ USD</option>
-                <option>£ EUR</option>
-                <option>¥ JPY</option>
-              </select> */}
               {this.props.isUSD && <label>$</label>}
               {this.props.isEUR && <label>£</label>}
               {this.props.isJPY && <label>¥</label>}
@@ -96,6 +99,12 @@ export class Navbar extends Component {
               </button>
             </div>
           </div>
+          <Modal
+            itemsIDs={this.props.itemsIDs}
+            modal={this.props.modal}
+            closeModal={this.props.closeModal}
+            currency={this.state.currency}
+          />
         </Nav>
       </>
     );
