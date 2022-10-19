@@ -20,11 +20,13 @@ export default class AllItems extends Component {
                     return (
                       <Item
                         key={product.id}
+                        id={product.id}
                         title={product.name}
                         price={product.prices[currency].amount}
                         currency={product.prices[currency].currency.symbol}
                         img={product.gallery[0]}
                         inStock={product.inStock}
+                        addToCart={this.props.addToCart}
                       />
                     );
                   })}
