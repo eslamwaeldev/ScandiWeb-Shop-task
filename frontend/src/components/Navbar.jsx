@@ -19,14 +19,8 @@ const Nav = styled.nav`
 `;
 
 export class Navbar extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currency: this.props.USD ? 0 : this.props.EUR ? 1 : this.props.JPY ? 3 : 0,
-    };
-  }
   render() {
+    const currency = this.props.USD ? 0 : this.props.EUR ? 1 : this.props.JPY ? 3 : 0;
     return (
       <>
         <Nav>
@@ -103,7 +97,8 @@ export class Navbar extends Component {
             itemsIDs={this.props.itemsIDs}
             modal={this.props.modal}
             closeModal={this.props.closeModal}
-            currency={this.state.currency}
+            currency={currency}
+            removeItem={this.props.removeItem}
           />
         </Nav>
       </>
