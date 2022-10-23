@@ -1,12 +1,19 @@
 body {
   margin: 0;
   font-family: "Raleway", sans-serif;
+  z-index: 0;
+  height: 0px;
+  min-height: 100vh;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 p {
   margin: 0;
+}
+.container {
+  z-index: 0;
+  height: 0px;
 }
 
 .nav-label-wrap {
@@ -53,6 +60,8 @@ p {
 .category-component {
   margin-left: 5.6rem;
   margin-top: 5rem;
+  z-index: 0;
+  height: 0px;
 }
 .nav-icon-container {
   display: flex;
@@ -83,6 +92,8 @@ p {
   grid-template-columns: repeat(3, [col-start] 400px [col-end]);
   row-gap: 6.44rem;
   column-gap: 40px;
+  z-index: 0;
+  height: 0px;
 }
 .grid-item {
   padding-top: 1rem;
@@ -133,17 +144,6 @@ p {
   width: 52px;
   left: 7rem;
   bottom: 3rem;
-}
-
-.modal {
-  z-index: 1;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 2000px;
-  /* overflow: auto; */
-  background: rgba(57, 55, 72, 0.22);
 }
 
 .modal-content {
@@ -242,6 +242,9 @@ p {
   justify-content: center;
   align-items: center;
   position: relative;
+}
+.option:hover {
+  background-color: #eeeeee;
 }
 .options-menu {
   display: flex;
