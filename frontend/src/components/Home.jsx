@@ -30,14 +30,23 @@ export class Home extends Component {
     this.closeModal = this.closeModal.bind(this);
     this.handleCurrencyClicked = this.handleCurrencyClicked.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.removeFromCart = this.removeFromCart.bind(this);
   }
   addToCart(id) {
-    console.log("🚀 ~ file: Home.jsx ~ line 35 ~ Home ~ addToCart ~ id", id);
+    if (this.state.itemsIDs.includes(id) === false) {
+      console.log("inside if");
+      this.setState({
+        ...this.state,
+        itemsIDs: this.state.itemsIDs.concat([id]),
+      });
+    }
+  }
+  removeFromCart(id) {
+    const newItemsArr = this.state.itemsIDs.filter((item) => item !== id);
     this.setState({
       ...this.state,
-      itemsIDs: this.state.itemsIDs.concat([id]),
+      itemsIDs: newItemsArr,
     });
-    console.log("🚀 ~ file: Home.jsx ~ line 39 ~ Home ~ addToCart ~ itemsIDs", this.state.itemsIDs);
   }
   handleUSDSelected() {
     this.setState({
@@ -135,6 +144,7 @@ export class Home extends Component {
             EUR={this.state.isEUR}
             JPY={this.state.isJPY}
             itemsIDs={this.state.itemsIDs}
+            removeItem={this.removeFromCart}
           />
 
           <CategoryName isAll={this.state.isAll} isTech={this.state.isTech} isClothes={this.state.isClothes} />
