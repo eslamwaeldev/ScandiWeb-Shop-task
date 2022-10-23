@@ -18,7 +18,18 @@ export default class CartItem extends Component {
     this.setChosenSize = this.setChosenSize.bind(this);
   }
   componentDidMount() {
-    this.props.handleAddToTotalPrice(this.props.price);
+    console.log("🚀 ~ file: CartItem.jsx ~ line 22 ~ CartItem ~ componentDidMount ~ id", this.props.id);
+    if (this.props.quantity[this.props.id] === 0 || this.props.quantity[this.props.id]) {
+      this.setState({
+        ...this.state,
+        quantity: this.props.quantity[this.props.id],
+      });
+      this.props.handleAddToTotalPrice(this.props.price * this.props.quantity[this.props.id]);
+    } else {
+      this.props.handleQuantity(this.props.id, this.state.quantity);
+      this.props.handleAddToTotalPrice(this.props.price);
+    }
+    console.log(this.props.attributes);
   }
   setChosenColor(color) {
     this.setState({
@@ -98,9 +109,10 @@ export default class CartItem extends Component {
           <div className="quantity-control">
             <button
               className="quantity-btn"
-              onClick={() => {
+              onClick={async () => {
                 this.increment();
-                this.props.handleAddToTotalPrice(this.props.price);
+                await this.props.handleAddToTotalPrice(this.props.price);
+                this.props.handleQuantity(this.props.id, this.state.quantity);
               }}
             >
               +
@@ -108,10 +120,13 @@ export default class CartItem extends Component {
             <p className="items-number">{this.state.quantity}</p>
             <button
               className="quantity-btn"
-              onClick={() => {
+              onClick={async () => {
                 this.decrement();
                 if (this.state.quantity > 0) {
-                  this.props.handleSubtractFromTotalPrice(this.props.price);
+                  await this.props.handleSubtractFromTotalPrice(this.props.price);
+                  this.props.handleQuantity(this.props.id, this.state.quantity);
+                } else {
+                  this.props.removeItem(this.props.id);
                 }
               }}
             >
