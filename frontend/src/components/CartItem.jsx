@@ -126,7 +126,8 @@ export default class CartItem extends Component {
                   await this.props.handleSubtractFromTotalPrice(this.props.price);
                   this.props.handleQuantity(this.props.id, this.state.quantity);
                 } else {
-                  this.props.removeItem(this.props.id);
+                  await this.props.removeItem(this.props.id);
+                  this.props.removeFromQuantity(this.props.id);
                 }
               }}
             >
