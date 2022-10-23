@@ -16,6 +16,21 @@ const Nav = styled.nav`
   position: relative;
   justify-content: center;
   z-index: 2;
+  .modal {
+    z-index: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 0px;
+    min-height: ${`${
+      document.documentElement.scrollHeight +
+      document.documentElement.offsetHeight +
+      document.documentElement.clientHeight
+    }px`};
+    /* overflow: auto; */
+    background: rgba(57, 55, 72, 0.22);
+  }
 `;
 
 export class Navbar extends Component {
