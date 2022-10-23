@@ -6,7 +6,6 @@ import { FIND_PRODUCT } from "./queries";
 export class Modal extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       totalPrice: 0,
       quantity: {},
@@ -15,6 +14,7 @@ export class Modal extends Component {
     this.handleSubtractFromTotalPrice = this.handleSubtractFromTotalPrice.bind(this);
     this.resetTotalPrice = this.resetTotalPrice.bind(this);
     this.handleQuantity = this.handleQuantity.bind(this);
+    this.removeFromQuantity = this.removeFromQuantity.bind(this);
   }
 
   handleAddToTotalPrice(price) {
@@ -46,6 +46,15 @@ export class Modal extends Component {
     });
     console.log(this.state.quantity);
   }
+  removeFromQuantity(id) {
+    this.setState({
+      ...this.state,
+      quantity: {
+        ...this.state.quantity,
+        [id]: undefined,
+      },
+    });
+  }
   render() {
     console.log(this.props.itemsIDs);
     return (
@@ -60,7 +69,7 @@ export class Modal extends Component {
                 {this.props.itemsIDs.length > 0
                   ? this.props.itemsIDs.map((id, index) => {
                       return (
-                        <Query key={index} query={FIND_PRODUCT} variables={{ product: id }}>
+                        <Query key={index} query={FIND_PRODUCT} variables={{ product: id }} fetchPolicy="no-cache">
                           {({ loading, error, data }) => {
                             if (loading) return "Loading...";
                             if (error) return <h1>Error!..</h1>;
@@ -83,6 +92,7 @@ export class Modal extends Component {
                                 removeItem={this.props.removeItem}
                                 quantity={this.state.quantity}
                                 handleQuantity={this.handleQuantity}
+                                removeFromQuantity={this.removeFromQuantity}
                               />
                             ) : (
                               <CartItem
