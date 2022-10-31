@@ -421,6 +421,16 @@ p {
   line-height: 159.96%;
   width: 292px;
 }
+.no-items-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.no-item-text {
+  font-weight: 400;
+  font-size: 24px;
+  color: #8d8f9a;
+}
 
 @media (max-width: 400px) {
   .nav-label {
