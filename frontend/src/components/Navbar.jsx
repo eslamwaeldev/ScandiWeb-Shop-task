@@ -114,6 +114,14 @@ export class Navbar extends Component {
             closeModal={this.props.closeModal}
             currency={currency}
             removeItem={this.props.removeItem}
+            handleCartPage={this.props.handleCartPage}
+            handleAddToTotalPrice={this.props.handleAddToTotalPrice}
+            handleSubtractFromTotalPrice={this.props.handleSubtractFromTotalPrice}
+            resetTotalPrice={this.props.resetTotalPrice}
+            handleQuantity={this.props.handleQuantity}
+            removeFromQuantity={this.props.removeFromQuantity}
+            quantity={this.props.quantity}
+            totalPrice={this.props.totalPrice}
           />
         </Nav>
       </>

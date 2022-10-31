@@ -27,6 +27,8 @@ export default class AllItems extends Component {
                         img={product.gallery[0]}
                         inStock={product.inStock}
                         addToCart={this.props.addToCart}
+                        handleItemPage={this.props.handleItemPage}
+                        handleClickedItemId={this.props.handleClickedItemId}
                       />
                     );
                   })}
