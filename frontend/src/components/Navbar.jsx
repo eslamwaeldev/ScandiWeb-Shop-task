@@ -114,6 +114,7 @@ export class Navbar extends Component {
             closeModal={this.props.closeModal}
             currency={currency}
             removeItem={this.props.removeItem}
+            handleCartPage={this.props.handleCartPage}
           />
         </Nav>
       </>
