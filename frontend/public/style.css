@@ -290,11 +290,11 @@ p {
   display: grid;
   grid-template-columns: repeat(3, [col-start] 36px [col-end]);
   row-gap: 8px;
-  column-gap: 8px;
+  column-gap: 15px;
 }
 .item-options-containers {
   display: grid;
-  grid-template-columns: repeat(6, [col-start] 36px [col-end]);
+  grid-template-columns: repeat(6, [col-start] 40px [col-end]);
   row-gap: 8px;
   column-gap: 8px;
 }
@@ -309,8 +309,8 @@ p {
 }
 .color-btn {
   border: none;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
 }
 .quantity-control {
   display: flex;
@@ -335,12 +335,11 @@ p {
   height: 190px;
 }
 .size-btn {
-  width: 40px;
+  width: 45px;
   height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
   font-family: "Source Sans Pro";
   font-style: normal;
   font-weight: 400;
@@ -388,6 +387,7 @@ p {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  margin-top: 8px;
 }
 .item-option-title {
   font-family: "Roboto Condensed";
@@ -395,6 +395,31 @@ p {
   font-weight: 700;
   font-size: 18px;
   line-height: 18px;
+}
+.item-page-price {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 1rem;
+}
+.item-btn-container {
+  display: flex;
+  justify-content: start;
+  margin-top: 20px;
+}
+.item-page-add-btn {
+  width: 292px;
+  height: 52px;
+  padding: 16px 32px;
+}
+.description {
+  margin-top: 40px;
+}
+.description-text {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 159.96%;
+  width: 292px;
 }
 
 @media (max-width: 400px) {
