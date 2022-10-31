@@ -38,6 +38,7 @@ export default class ItemPage extends Component {
             if (error) return <h1>Error!..</h1>;
             console.log(data);
             const { product } = data;
+            const { description } = product;
             return (
               <>
                 <div className="item-page">
@@ -71,7 +72,8 @@ export default class ItemPage extends Component {
                         <div className="item-options-container">
                           <p className="item-option-title">Color:</p>
                           <div className="item-options-containers">
-                            {product.attributes[0].items &&
+                            {product.attributes.length > 0 &&
+                              product.attributes[0].items &&
                               product.attributes[0].items.map((color) => {
                                 return (
                                   <ColorBtn
@@ -89,8 +91,26 @@ export default class ItemPage extends Component {
                       )}
                       <div className="item-page-price">
                         <p className="item-option-title">Price:</p>
-                        <p className="item-option-title price-size"></p>
-                        {/* get the currency from nav bar and show price depending on it */}
+                        <p className="item-option-title price-size">
+                          {
+                            product.prices[this.props.USD ? 0 : this.props.EUR ? 1 : this.props.JPY ? 3 : 0].currency
+                              .symbol
+                          }
+                          {product.prices[this.props.USD ? 0 : this.props.EUR ? 1 : this.props.JPY ? 3 : 0].amount}
+                        </p>
+                      </div>
+                      <div className="item-btn-container">
+                        <button
+                          className="btn-cart btn-green item-page-add-btn"
+                          onClick={() => {
+                            this.props.addToCart(this.props.itemId);
+                          }}
+                        >
+                          Add to cart
+                        </button>
+                      </div>
+                      <div className="description">
+                        <div className="" dangerouslySetInnerHTML={{ __html: description }}></div>
                       </div>
                     </div>
                   </div>
