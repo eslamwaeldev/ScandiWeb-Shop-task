@@ -24,6 +24,8 @@ export default class Home extends Component {
       isItem: false,
       isCart: false,
       clickedItemId: "",
+      totalPrice: 0,
+      quantity: {},
     };
     this.handleUSDSelected = this.handleUSDSelected.bind(this);
     this.handleEURSelected = this.handleEURSelected.bind(this);
@@ -39,6 +41,11 @@ export default class Home extends Component {
     this.handleCartPage = this.handleCartPage.bind(this);
     this.handleItemPage = this.handleItemPage.bind(this);
     this.handleClickedItemId = this.handleClickedItemId.bind(this);
+    this.handleAddToTotalPrice = this.handleAddToTotalPrice.bind(this);
+    this.handleSubtractFromTotalPrice = this.handleSubtractFromTotalPrice.bind(this);
+    this.resetTotalPrice = this.resetTotalPrice.bind(this);
+    this.handleQuantity = this.handleQuantity.bind(this);
+    this.removeFromQuantity = this.removeFromQuantity.bind(this);
   }
   addToCart(id) {
     if (this.state.itemsIDs.includes(id) === false) {
@@ -163,6 +170,44 @@ export default class Home extends Component {
       currencyClicked: !this.state.currencyClicked,
     });
   }
+  handleAddToTotalPrice(price) {
+    this.setState((prevState) => ({
+      totalPrice: prevState.totalPrice + price,
+    }));
+  }
+  handleSubtractFromTotalPrice(price) {
+    this.setState({
+      totalPrice: this.state.totalPrice - price,
+    });
+  }
+  resetTotalPrice(e) {
+    console.log("reset");
+    console.log(e.target.id);
+    if (e.target.id === "myModal") {
+      this.setState({
+        totalPrice: 0,
+      });
+    }
+  }
+  handleQuantity(id, amount) {
+    this.setState({
+      ...this.state,
+      quantity: {
+        ...this.state.quantity,
+        [id]: amount,
+      },
+    });
+    console.log(this.state.quantity);
+  }
+  removeFromQuantity(id) {
+    this.setState({
+      ...this.state,
+      quantity: {
+        ...this.state.quantity,
+        [id]: undefined,
+      },
+    });
+  }
 
   render() {
     return (
@@ -192,6 +237,13 @@ export default class Home extends Component {
             itemsIDs={this.state.itemsIDs}
             removeItem={this.removeFromCart}
             handleCartPage={this.handleCartPage}
+            handleAddToTotalPrice={this.handleAddToTotalPrice}
+            handleSubtractFromTotalPrice={this.handleSubtractFromTotalPrice}
+            resetTotalPrice={this.resetTotalPrice}
+            handleQuantity={this.handleQuantity}
+            removeFromQuantity={this.removeFromQuantity}
+            quantity={this.state.quantity}
+            totalPrice={this.state.totalPrice}
           />
           {this.state.isHome && (
             <CategoryName isAll={this.state.isAll} isTech={this.state.isTech} isClothes={this.state.isClothes} />
@@ -227,7 +279,15 @@ export default class Home extends Component {
             />
           )}
           {this.state.isCart && <Cart />}
-          {this.state.isItem && <ItemPage itemId={this.state.clickedItemId} />}
+          {this.state.isItem && (
+            <ItemPage
+              itemId={this.state.clickedItemId}
+              USD={this.state.isUSD}
+              EUR={this.state.isEUR}
+              JPY={this.state.isJPY}
+              addToCart={this.addToCart}
+            />
+          )}
         </div>
       </>
     );
