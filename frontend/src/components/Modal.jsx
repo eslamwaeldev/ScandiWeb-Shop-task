@@ -123,7 +123,9 @@ export class Modal extends Component {
                 </p>
               </div>
               <div className="button-container">
-                <button className="btn-cart btn-default btn-left">VIEW BAG</button>
+                <button className="btn-cart btn-default btn-left" onClick={this.props.handleCartPage}>
+                  VIEW BAG
+                </button>
                 <button className="btn-cart btn-green btn-right">CHECKOUT</button>
               </div>
             </div>
