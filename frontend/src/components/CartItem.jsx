@@ -12,9 +12,10 @@ export default class CartItem extends Component {
       chosenSize: this.props.size,
       quantity: 1,
     };
-    this.setChosenColor = this.setChosenColor.bind(this);
+
     this.increment = this.increment.bind(this);
     this.decrement = this.decrement.bind(this);
+    this.setChosenColor = this.setChosenColor.bind(this);
     this.setChosenSize = this.setChosenSize.bind(this);
   }
   componentDidMount() {
@@ -68,8 +69,8 @@ export default class CartItem extends Component {
               {this.props.currency} {this.props.price}
             </p>
             {this.state.type && this.state.type === "text" ? (
-              <div className="cart-size-container">
-                <p className="size-title">Size</p>
+              <div>
+                <p className="size-title">Size:</p>
                 <div className="options-containers">
                   {this.props.attributes &&
                     this.props.attributes.map((size) => {
@@ -86,8 +87,8 @@ export default class CartItem extends Component {
               </div>
             ) : (
               this.props.attributes && (
-                <div className="cart-color-container">
-                  <p className="cart-color-title">Color</p>
+                <div>
+                  <p className="cart-color-title">Color:</p>
                   <div className="options-containers">
                     {this.props.attributes.map((color) => {
                       return (
