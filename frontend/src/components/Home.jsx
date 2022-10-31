@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import CategoryName from "./CategoryName";
 import Navbar from "./Navbar";
 import AllItems from "./AllItems";
 import TechItems from "./TechItems";
 import ClothesItems from "./ClothesItems";
+import ItemPage from "./ItemPage";
+import Cart from "./Cart";
 
-export class Home extends Component {
+export default class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,6 +20,10 @@ export class Home extends Component {
       currencyClicked: false,
       modal: false,
       itemsIDs: [],
+      isHome: true,
+      isItem: false,
+      isCart: false,
+      clickedItemId: "",
     };
     this.handleUSDSelected = this.handleUSDSelected.bind(this);
     this.handleEURSelected = this.handleEURSelected.bind(this);
@@ -31,6 +36,9 @@ export class Home extends Component {
     this.handleCurrencyClicked = this.handleCurrencyClicked.bind(this);
     this.addToCart = this.addToCart.bind(this);
     this.removeFromCart = this.removeFromCart.bind(this);
+    this.handleCartPage = this.handleCartPage.bind(this);
+    this.handleItemPage = this.handleItemPage.bind(this);
+    this.handleClickedItemId = this.handleClickedItemId.bind(this);
   }
   addToCart(id) {
     if (this.state.itemsIDs.includes(id) === false) {
@@ -79,6 +87,9 @@ export class Home extends Component {
       isAll: true,
       isTech: false,
       isClothes: false,
+      isHome: true,
+      isCart: false,
+      isItem: false,
     });
   }
   handleTechSelected() {
@@ -87,6 +98,9 @@ export class Home extends Component {
       isAll: false,
       isTech: true,
       isClothes: false,
+      isHome: true,
+      isCart: false,
+      isItem: false,
     });
   }
   handleClothesSelected() {
@@ -95,6 +109,38 @@ export class Home extends Component {
       isAll: false,
       isTech: false,
       isClothes: true,
+      isHome: true,
+      isCart: false,
+      isItem: false,
+    });
+  }
+  handleCartPage() {
+    this.setState({
+      ...this.state,
+      isAll: false,
+      isTech: false,
+      isClothes: false,
+      isHome: false,
+      isCart: true,
+      isItem: false,
+      modal: false,
+    });
+  }
+  handleItemPage() {
+    this.setState({
+      ...this.state,
+      isAll: false,
+      isTech: false,
+      isClothes: false,
+      isHome: false,
+      isCart: false,
+      isItem: true,
+    });
+  }
+  handleClickedItemId(id) {
+    this.setState({
+      ...this.state,
+      clickedItemId: id,
     });
   }
   controlModal() {
@@ -145,15 +191,19 @@ export class Home extends Component {
             JPY={this.state.isJPY}
             itemsIDs={this.state.itemsIDs}
             removeItem={this.removeFromCart}
+            handleCartPage={this.handleCartPage}
           />
-
-          <CategoryName isAll={this.state.isAll} isTech={this.state.isTech} isClothes={this.state.isClothes} />
+          {this.state.isHome && (
+            <CategoryName isAll={this.state.isAll} isTech={this.state.isTech} isClothes={this.state.isClothes} />
+          )}
           {this.state.isAll && (
             <AllItems
               USD={this.state.isUSD}
               EUR={this.state.isEUR}
               JPY={this.state.isJPY}
               addToCart={this.addToCart}
+              handleItemPage={this.handleItemPage}
+              handleClickedItemId={this.handleClickedItemId}
             />
           )}
           {this.state.isTech && (
@@ -162,6 +212,8 @@ export class Home extends Component {
               EUR={this.state.isEUR}
               JPY={this.state.isJPY}
               addToCart={this.addToCart}
+              handleItemPage={this.handleItemPage}
+              handleClickedItemId={this.handleClickedItemId}
             />
           )}
           {this.state.isClothes && (
@@ -170,16 +222,14 @@ export class Home extends Component {
               EUR={this.state.isEUR}
               JPY={this.state.isJPY}
               addToCart={this.addToCart}
+              handleClickedItemId={this.handleClickedItemId}
+              handleItemPage={this.handleItemPage}
             />
           )}
+          {this.state.isCart && <Cart />}
+          {this.state.isItem && <ItemPage itemId={this.state.clickedItemId} />}
         </div>
       </>
     );
   }
 }
-
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
