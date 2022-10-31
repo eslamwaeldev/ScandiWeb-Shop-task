@@ -31,8 +31,10 @@ export default class Item extends Component {
           <button
             className="item-btn item-page-btn"
             onClick={async () => {
-              await this.props.handleClickedItemId(this.props.id);
-              this.props.handleItemPage();
+              if (this.props.inStock) {
+                await this.props.handleClickedItemId(this.props.id);
+                this.props.handleItemPage();
+              }
             }}
           >
             <img className="item-img" alt="item" src={this.props.img} />
@@ -40,8 +42,10 @@ export default class Item extends Component {
           <button
             className="item title item-btn item-page-btn"
             onClick={async () => {
-              await this.props.handleClickedItemId(this.props.id);
-              this.props.handleItemPage();
+              if (this.props.inStock) {
+                await this.props.handleClickedItemId(this.props.id);
+                this.props.handleItemPage();
+              }
             }}
           >
             {this.props.title}
