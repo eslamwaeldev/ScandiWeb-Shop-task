@@ -13,6 +13,7 @@ p {
 .container {
   z-index: 0;
   height: 0px;
+  min-height: 100vh;
 }
 
 .nav-label-wrap {
@@ -142,7 +143,7 @@ p {
   height: 52px;
   width: 52px;
   left: 7rem;
-  bottom: 3rem;
+  bottom: 4rem;
 }
 
 .modal-content {
@@ -271,6 +272,7 @@ p {
   height: 190px;
   width: 124px;
 }
+
 .item-def {
   display: flex;
   flex-direction: column;
