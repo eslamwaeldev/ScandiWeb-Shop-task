@@ -15,6 +15,7 @@ export default class SizeBtn extends Component {
           className={`${this.props.chosenSize === this.state.size && "size-btn-chosen"} size-btn`}
           onClick={() => {
             this.props.setChosenSize(this.state.size);
+            this.props.setSize && this.props.setSize(this.props.id, this.state.size);
           }}
         >
           {this.props.size}
