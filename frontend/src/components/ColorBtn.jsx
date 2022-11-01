@@ -21,6 +21,7 @@ export default class ColorBtn extends Component {
             style={{ backgroundColor: this.state.color }}
             onClick={() => {
               this.props.setChosen(this.state.color);
+              this.props.setColor && this.props.setColor(this.props.color, this.state.color);
             }}
           ></button>
         </div>
