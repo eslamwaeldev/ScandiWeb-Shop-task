@@ -26,7 +26,7 @@ const Nav = styled.nav`
     min-height: ${`${
       document.documentElement.scrollHeight +
       document.documentElement.offsetHeight +
-      document.documentElement.clientHeight
+      0.556 * document.documentElement.clientHeight
     }px`};
     /* overflow: auto; */
     background: rgba(57, 55, 72, 0.22);
@@ -122,6 +122,10 @@ export class Navbar extends Component {
             removeFromQuantity={this.props.removeFromQuantity}
             quantity={this.props.quantity}
             totalPrice={this.props.totalPrice}
+            size={this.props.size}
+            setSize={this.props.setSize}
+            color={this.props.color}
+            setColor={this.props.setColor}
           />
         </Nav>
       </>
