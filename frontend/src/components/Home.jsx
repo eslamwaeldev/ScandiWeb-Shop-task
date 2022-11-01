@@ -26,6 +26,8 @@ export default class Home extends Component {
       clickedItemId: "",
       totalPrice: 0,
       quantity: {},
+      size: {},
+      color: {},
     };
     this.handleUSDSelected = this.handleUSDSelected.bind(this);
     this.handleEURSelected = this.handleEURSelected.bind(this);
@@ -46,6 +48,8 @@ export default class Home extends Component {
     this.resetTotalPrice = this.resetTotalPrice.bind(this);
     this.handleQuantity = this.handleQuantity.bind(this);
     this.removeFromQuantity = this.removeFromQuantity.bind(this);
+    this.setSize = this.setSize.bind(this);
+    this.setColor = this.setColor.bind(this);
   }
   addToCart(id) {
     if (this.state.itemsIDs.includes(id) === false) {
@@ -127,7 +131,7 @@ export default class Home extends Component {
       isAll: false,
       isTech: false,
       isClothes: false,
-      isHome: false,
+      isHome: true,
       isCart: true,
       isItem: false,
       modal: false,
@@ -208,6 +212,24 @@ export default class Home extends Component {
       },
     });
   }
+  setSize(id, size) {
+    this.setState({
+      ...this.state,
+      size: {
+        ...this.state.size,
+        [id]: size,
+      },
+    });
+  }
+  setColor(id, color) {
+    this.setState({
+      ...this.state,
+      color: {
+        ...this.state.color,
+        [id]: color,
+      },
+    });
+  }
 
   render() {
     return (
@@ -244,9 +266,18 @@ export default class Home extends Component {
             removeFromQuantity={this.removeFromQuantity}
             quantity={this.state.quantity}
             totalPrice={this.state.totalPrice}
+            color={this.state.color}
+            setColor={this.setColor}
+            size={this.state.size}
+            setSize={this.setSize}
           />
           {this.state.isHome && (
-            <CategoryName isAll={this.state.isAll} isTech={this.state.isTech} isClothes={this.state.isClothes} />
+            <CategoryName
+              isAll={this.state.isAll}
+              isTech={this.state.isTech}
+              isClothes={this.state.isClothes}
+              isCart={this.state.isCart}
+            />
           )}
           {this.state.isAll && (
             <AllItems
@@ -278,7 +309,25 @@ export default class Home extends Component {
               handleItemPage={this.handleItemPage}
             />
           )}
-          {this.state.isCart && <Cart />}
+          {this.state.isCart && (
+            <Cart
+              itemsIDs={this.state.itemsIDs}
+              currency={this.state.USD ? 0 : this.state.EUR ? 1 : this.state.JPY ? 3 : 0}
+              removeItem={this.removeItem}
+              handleCartPage={this.handleCartPage}
+              handleAddToTotalPrice={this.handleAddToTotalPrice}
+              handleSubtractFromTotalPrice={this.handleSubtractFromTotalPrice}
+              resetTotalPrice={this.resetTotalPrice}
+              handleQuantity={this.handleQuantity}
+              removeFromQuantity={this.removeFromQuantity}
+              quantity={this.state.quantity}
+              totalPrice={this.state.totalPrice}
+              size={this.state.size}
+              setSize={this.setSize}
+              color={this.state.color}
+              setColor={this.setColor}
+            />
+          )}
           {this.state.isItem && (
             <ItemPage
               itemId={this.state.clickedItemId}
@@ -286,6 +335,10 @@ export default class Home extends Component {
               EUR={this.state.isEUR}
               JPY={this.state.isJPY}
               addToCart={this.addToCart}
+              setSize={this.setSize}
+              setColor={this.setColor}
+              size={this.state.size[this.state.clickedItemId]}
+              color={this.state.color[this.state.clickedItemId]}
             />
           )}
         </div>
