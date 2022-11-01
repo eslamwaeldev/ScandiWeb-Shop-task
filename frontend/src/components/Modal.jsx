@@ -24,6 +24,7 @@ export class Modal extends Component {
                           if (loading) return "Loading...";
                           if (error) return <h1>Error!..</h1>;
                           const { product } = data;
+                          const itemId = id;
                           console.log(data.product);
                           return product.attributes.length > 0 ? (
                             <CartItem
@@ -31,8 +32,16 @@ export class Modal extends Component {
                               id={id}
                               attributes={product.attributes[0].items}
                               type={product.attributes[0].type}
-                              color={product.attributes[0].items[0].value}
-                              size={product.attributes[0].items[0].value}
+                              color={
+                                this.props.color[itemId]
+                                  ? this.props.color[itemId]
+                                  : product.attributes[0].items[0].value
+                              }
+                              size={
+                                this.props.size[itemId]
+                                  ? this.props.size[itemId]
+                                  : product.attributes[0].items[0].value
+                              }
                               name={product.name}
                               currency={product.prices[this.props.currency].currency.symbol}
                               price={product.prices[this.props.currency].amount}
@@ -43,6 +52,8 @@ export class Modal extends Component {
                               quantity={this.props.quantity}
                               handleQuantity={this.props.handleQuantity}
                               removeFromQuantity={this.props.removeFromQuantity}
+                              setSize={this.props.setSize}
+                              setColor={this.props.setColor}
                             />
                           ) : (
                             <CartItem
