@@ -10,8 +10,8 @@ export default class ItemPage extends Component {
     super(props);
 
     this.state = {
-      chosenSize: "",
-      chosenColor: "",
+      chosenSize: this.props.size && this.props.size,
+      chosenColor: this.props.color && this.props.color,
     };
     this.setChosenColor = this.setChosenColor.bind(this);
     this.setChosenSize = this.setChosenSize.bind(this);
@@ -27,6 +27,18 @@ export default class ItemPage extends Component {
       ...this.state,
       chosenSize: size,
     });
+  }
+  componentDidMount() {
+    this.props.size &&
+      this.setState({
+        ...this.state,
+        chosenSize: this.props.size,
+      });
+    this.props.color &&
+      this.setState({
+        ...this.state,
+        chosenColor: this.props.color,
+      });
   }
   render() {
     console.log("inside item page");
@@ -63,6 +75,8 @@ export default class ItemPage extends Component {
                                     setChosenSize={this.setChosenSize}
                                     size={size.value}
                                     chosenSize={this.state.chosenSize}
+                                    setSize={this.props.setSize}
+                                    id={this.props.itemId}
                                   />
                                 );
                               })}
@@ -70,23 +84,27 @@ export default class ItemPage extends Component {
                         </div>
                       ) : (
                         <div className="item-options-container">
-                          <p className="item-option-title">Color:</p>
-                          <div className="item-options-containers">
-                            {product.attributes.length > 0 &&
-                              product.attributes[0].items &&
-                              product.attributes[0].items.map((color) => {
-                                return (
-                                  <ColorBtn
-                                    key={color.id}
-                                    color={color.value}
-                                    chosenColor={this.state.chosenColor}
-                                    setChosen={this.setChosenColor}
-                                    defaultColorChosen={this.state.defaultColorChosen}
-                                    setDefaultChosenColor={this.setDefaultChosenColor}
-                                  />
-                                );
-                              })}
-                          </div>
+                          {product.attributes.length > 0 && product.attributes[0].items && (
+                            <>
+                              <p className="item-option-title">Color:</p>
+                              <div className="item-options-containers">
+                                {product.attributes[0].items.map((color) => {
+                                  return (
+                                    <ColorBtn
+                                      key={color.id}
+                                      color={color.value}
+                                      chosenColor={this.state.chosenColor}
+                                      setChosen={this.setChosenColor}
+                                      defaultColorChosen={this.state.defaultColorChosen}
+                                      setDefaultChosenColor={this.setDefaultChosenColor}
+                                      setColor={this.props.setColor}
+                                      id={this.props.itemId}
+                                    />
+                                  );
+                                })}
+                              </div>
+                            </>
+                          )}
                         </div>
                       )}
                       <div className="item-page-price">
