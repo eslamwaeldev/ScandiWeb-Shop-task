@@ -80,6 +80,8 @@ export default class CartItem extends Component {
                           setChosenSize={this.setChosenSize}
                           size={size.value}
                           chosenSize={this.state.chosenSize}
+                          id={this.props.id}
+                          setSize={this.props.setSize && this.props.setSize}
                         />
                       );
                     })}
@@ -94,11 +96,13 @@ export default class CartItem extends Component {
                       return (
                         <ColorBtn
                           key={color.id}
+                          id={this.props.id}
                           color={color.value}
                           chosenColor={this.state.chosenColor}
                           setChosen={this.setChosenColor}
                           defaultColorChosen={this.state.defaultColorChosen}
                           setDefaultChosenColor={this.setDefaultChosenColor}
+                          setColor={this.props.setColor && this.props.setColor}
                         />
                       );
                     })}
