@@ -69,7 +69,7 @@ export default class CartItem extends Component {
   render() {
     return (
       <>
-        <div className="cart-item-container">
+        <div className={`${this.props.modal ? "" : "border"} cart-item-container`}>
           <div className={`${this.props.modal ? "cart-item-details" : "cart-item-page-details"}`}>
             <p className="cart-item-name">{this.props.name}</p>
             <p className="cart-item-price">
