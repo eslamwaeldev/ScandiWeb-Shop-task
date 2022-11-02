@@ -4,8 +4,14 @@ import CartItem from "./CartItem";
 import { FIND_PRODUCT } from "./queries";
 
 export class Modal extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modal: true,
+    };
+  }
+
   render() {
-    console.log(this.props.itemsIDs);
     return (
       this.props.modal && (
         <div onClick={this.props.resetTotalPrice}>
@@ -54,6 +60,7 @@ export class Modal extends Component {
                               removeFromQuantity={this.props.removeFromQuantity}
                               setSize={this.props.setSize}
                               setColor={this.props.setColor}
+                              modal={this.state.modal}
                             />
                           ) : (
                             <CartItem
@@ -68,6 +75,7 @@ export class Modal extends Component {
                               removeItem={this.props.removeItem}
                               quantity={this.props.quantity}
                               handleQuantity={this.props.handleQuantity}
+                              modal={this.state.modal}
                             />
                           );
                         }}
