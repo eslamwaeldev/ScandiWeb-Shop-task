@@ -54,50 +54,56 @@ export default class Cart extends Component {
                       const itemId = id;
                       console.log(data.product);
                       return product.attributes.length > 0 ? (
-                        <CartItem
-                          key={product.name}
-                          id={id}
-                          attributes={product.attributes[0].items}
-                          type={product.attributes[0].type}
-                          color={
-                            this.props.color[itemId]
-                              ? this.props.color[itemId]
-                              : product.attributes[0].items[0].value
-                          }
-                          size={
-                            this.props.size[itemId] ? this.props.size[itemId] : product.attributes[0].items[0].value
-                          }
-                          name={product.name}
-                          currency={product.prices[this.props.currency].currency.symbol}
-                          price={product.prices[this.props.currency].amount}
-                          img={product.gallery[0]}
-                          handleAddToTotalPrice={this.props.handleAddToTotalPrice}
-                          handleSubtractFromTotalPrice={this.props.handleSubtractFromTotalPrice}
-                          removeItem={this.props.removeItem}
-                          quantity={this.props.quantity}
-                          handleQuantity={this.props.handleQuantity}
-                          removeFromQuantity={this.props.removeFromQuantity}
-                          setSize={this.props.setSize}
-                          setColor={this.props.setColor}
-                          handleTax={this.handleCartPageTax}
-                          handleCartQuantity={this.handleCartQuantity}
-                        />
+                        <>
+                          <CartItem
+                            key={product.name}
+                            id={id}
+                            attributes={product.attributes[0].items}
+                            type={product.attributes[0].type}
+                            color={
+                              this.props.color[itemId]
+                                ? this.props.color[itemId]
+                                : product.attributes[0].items[0].value
+                            }
+                            size={
+                              this.props.size[itemId]
+                                ? this.props.size[itemId]
+                                : product.attributes[0].items[0].value
+                            }
+                            name={product.name}
+                            currency={product.prices[this.props.currency].currency.symbol}
+                            price={product.prices[this.props.currency].amount}
+                            img={product.gallery[0]}
+                            handleAddToTotalPrice={this.props.handleAddToTotalPrice}
+                            handleSubtractFromTotalPrice={this.props.handleSubtractFromTotalPrice}
+                            removeItem={this.props.removeItem}
+                            quantity={this.props.quantity}
+                            handleQuantity={this.props.handleQuantity}
+                            removeFromQuantity={this.props.removeFromQuantity}
+                            setSize={this.props.setSize}
+                            setColor={this.props.setColor}
+                            handleTax={this.handleCartPageTax}
+                            handleCartQuantity={this.handleCartQuantity}
+                          />
+                        </>
                       ) : (
-                        <CartItem
-                          key={index}
-                          id={id}
-                          name={product.name}
-                          currency={product.prices[this.props.currency].currency.symbol}
-                          price={product.prices[this.props.currency].amount}
-                          img={product.gallery[0]}
-                          handleAddToTotalPrice={this.props.handleAddToTotalPrice}
-                          handleSubtractFromTotalPrice={this.props.handleSubtractFromTotalPrice}
-                          removeItem={this.props.removeItem}
-                          quantity={this.props.quantity}
-                          handleQuantity={this.props.handleQuantity}
-                          handleTax={this.handleCartPageTax}
-                          handleCartQuantity={this.handleCartQuantity}
-                        />
+                        <>
+                          <CartItem
+                            key={index}
+                            id={id}
+                            name={product.name}
+                            currency={product.prices[this.props.currency].currency.symbol}
+                            price={product.prices[this.props.currency].amount}
+                            img={product.gallery[0]}
+                            handleAddToTotalPrice={this.props.handleAddToTotalPrice}
+                            handleSubtractFromTotalPrice={this.props.handleSubtractFromTotalPrice}
+                            removeItem={this.props.removeItem}
+                            quantity={this.props.quantity}
+                            handleQuantity={this.props.handleQuantity}
+                            handleTax={this.handleCartPageTax}
+                            handleCartQuantity={this.handleCartQuantity}
+                          />
+                        </>
                       );
                     }}
                   </Query>
@@ -109,7 +115,7 @@ export default class Cart extends Component {
               </div>
             )}
           </div>
-          <div className="car-page-price-container">
+          <div className="cart-page-price-container">
             <div className="cart-page-price">
               <p className="cart-page-light-text">Tax 21%:</p>
               <p className="cart-page-total-amount">
