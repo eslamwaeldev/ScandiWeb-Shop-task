@@ -19,18 +19,25 @@ export default class CartItem extends Component {
     this.setChosenSize = this.setChosenSize.bind(this);
   }
   componentDidMount() {
-    console.log("🚀 ~ file: CartItem.jsx ~ line 22 ~ CartItem ~ componentDidMount ~ id", this.props.id);
-    if (this.props.quantity[this.props.id] === 0 || this.props.quantity[this.props.id]) {
-      this.setState({
-        ...this.state,
-        quantity: this.props.quantity[this.props.id],
-      });
-      this.props.handleAddToTotalPrice(this.props.price * this.props.quantity[this.props.id]);
+    if (this.props.modal) {
+      if (this.props.quantity[this.props.id] === 0 || this.props.quantity[this.props.id]) {
+        this.setState({
+          ...this.state,
+          quantity: this.props.quantity[this.props.id],
+        });
+        this.props.handleAddToTotalPrice(this.props.price * this.props.quantity[this.props.id]);
+      } else {
+        this.props.handleQuantity(this.props.id, this.state.quantity);
+        this.props.handleAddToTotalPrice(this.props.price);
+      }
     } else {
-      this.props.handleQuantity(this.props.id, this.state.quantity);
-      this.props.handleAddToTotalPrice(this.props.price);
+      if (this.props.quantity[this.props.id] === 0 || this.props.quantity[this.props.id]) {
+        this.setState({
+          ...this.state,
+          quantity: this.props.quantity[this.props.id],
+        });
+      }
     }
-    console.log(this.props.attributes);
   }
   setChosenColor(color) {
     this.setState({
@@ -63,7 +70,7 @@ export default class CartItem extends Component {
     return (
       <>
         <div className="cart-item-container">
-          <div className="cart-item-details">
+          <div className={`${this.props.modal ? "cart-item-details" : "cart-item-page-details"}`}>
             <p className="cart-item-name">{this.props.name}</p>
             <p className="cart-item-price">
               {this.props.currency} {this.props.price}
@@ -71,7 +78,7 @@ export default class CartItem extends Component {
             {this.state.type && this.state.type === "text" ? (
               <div>
                 <p className="size-title">Size:</p>
-                <div className="options-containers">
+                <div className={`${this.props.modal ? "options-containers" : "cart-page-options"}`}>
                   {this.props.attributes &&
                     this.props.attributes.map((size) => {
                       return (
@@ -91,7 +98,7 @@ export default class CartItem extends Component {
               this.props.attributes && (
                 <div>
                   <p className="cart-color-title">Color:</p>
-                  <div className="options-containers">
+                  <div className={`${this.props.modal ? "options-containers" : "cart-page-options"}`}>
                     {this.props.attributes.map((color) => {
                       return (
                         <ColorBtn
@@ -117,7 +124,9 @@ export default class CartItem extends Component {
               onClick={async () => {
                 this.increment();
                 await this.props.handleAddToTotalPrice(this.props.price);
-                this.props.handleQuantity(this.props.id, this.state.quantity);
+                this.props.handleTax && (await this.props.handleTax());
+                await this.props.handleQuantity(this.props.id, this.state.quantity);
+                this.props.handleCartQuantity && this.props.handleCartQuantity();
               }}
             >
               +
@@ -129,7 +138,9 @@ export default class CartItem extends Component {
                 this.decrement();
                 if (this.state.quantity > 0) {
                   await this.props.handleSubtractFromTotalPrice(this.props.price);
-                  this.props.handleQuantity(this.props.id, this.state.quantity);
+                  this.props.handleTax && (await this.props.handleTax());
+                  await this.props.handleQuantity(this.props.id, this.state.quantity);
+                  this.props.handleCartQuantity && this.props.handleCartQuantity();
                 } else {
                   await this.props.removeItem(this.props.id);
                   this.props.removeFromQuantity(this.props.id);
