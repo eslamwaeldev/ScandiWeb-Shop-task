@@ -326,7 +326,7 @@ export default class Home extends Component {
           {this.state.isCart && (
             <Cart
               itemsIDs={this.state.itemsIDs}
-              currency={this.state.USD ? 0 : this.state.EUR ? 1 : this.state.JPY ? 3 : 0}
+              currency={this.state.isUSD ? 0 : this.state.isEUR ? 1 : this.state.isJPY ? 3 : 0}
               removeItem={this.removeFromCart}
               handleCartPage={this.handleCartPage}
               handleAddToTotalPrice={this.handleAddToTotalPrice}
@@ -340,6 +340,9 @@ export default class Home extends Component {
               setSize={this.setSize}
               color={this.state.color}
               setColor={this.setColor}
+              USD={this.state.isUSD}
+              EUR={this.state.isEUR}
+              JPY={this.state.isJPY}
             />
           )}
           {this.state.isItem && (

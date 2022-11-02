@@ -125,6 +125,9 @@ export default class Navbar extends Component {
             setSize={this.props.setSize}
             color={this.props.color}
             setColor={this.props.setColor}
+            USD={this.props.USD}
+            EUR={this.props.EUR}
+            JPY={this.props.JPY}
           />
         </Nav>
       </>
