@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import styled from "styled-components";
 import NavLink from "./NavLink";
 import Logo from "./Logo";
@@ -33,7 +32,7 @@ const Nav = styled.nav`
   }
 `;
 
-export class Navbar extends Component {
+export default class Navbar extends Component {
   render() {
     const currency = this.props.USD ? 0 : this.props.EUR ? 1 : this.props.JPY ? 3 : 0;
     return (
@@ -103,7 +102,7 @@ export class Navbar extends Component {
               )}
             </div>
             <div className="cart">
-              <button className="nav-label" onClick={this.props.controlModal}>
+              <button className="nav-label" onClick={this.props.notCartPage ? this.props.controlModal : undefined}>
                 <CartIcon />
               </button>
             </div>
@@ -132,9 +131,3 @@ export class Navbar extends Component {
     );
   }
 }
-
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = {};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
