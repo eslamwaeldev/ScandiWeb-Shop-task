@@ -23,6 +23,7 @@ export default class Home extends Component {
       isHome: true,
       isItem: false,
       isCart: false,
+      notCart: true,
       clickedItemId: "",
       totalPrice: 0,
       quantity: {},
@@ -50,6 +51,7 @@ export default class Home extends Component {
     this.removeFromQuantity = this.removeFromQuantity.bind(this);
     this.setSize = this.setSize.bind(this);
     this.setColor = this.setColor.bind(this);
+    this.clearTotalPrice = this.clearTotalPrice.bind(this);
   }
   addToCart(id) {
     if (this.state.itemsIDs.includes(id) === false) {
@@ -101,6 +103,7 @@ export default class Home extends Component {
       isHome: true,
       isCart: false,
       isItem: false,
+      notCart: true,
     });
   }
   handleTechSelected() {
@@ -112,6 +115,7 @@ export default class Home extends Component {
       isHome: true,
       isCart: false,
       isItem: false,
+      notCart: true,
     });
   }
   handleClothesSelected() {
@@ -123,6 +127,7 @@ export default class Home extends Component {
       isHome: true,
       isCart: false,
       isItem: false,
+      notCart: true,
     });
   }
   handleCartPage() {
@@ -135,6 +140,7 @@ export default class Home extends Component {
       isCart: true,
       isItem: false,
       modal: false,
+      notCart: false,
     });
   }
   handleItemPage() {
@@ -146,6 +152,7 @@ export default class Home extends Component {
       isHome: false,
       isCart: false,
       isItem: true,
+      notCart: true,
     });
   }
   handleClickedItemId(id) {
@@ -230,6 +237,12 @@ export default class Home extends Component {
       },
     });
   }
+  clearTotalPrice() {
+    this.setState({
+      ...this.state,
+      totalPrice: 0,
+    });
+  }
 
   render() {
     return (
@@ -270,6 +283,7 @@ export default class Home extends Component {
             setColor={this.setColor}
             size={this.state.size}
             setSize={this.setSize}
+            notCartPage={this.state.notCart}
           />
           {this.state.isHome && (
             <CategoryName
@@ -313,11 +327,11 @@ export default class Home extends Component {
             <Cart
               itemsIDs={this.state.itemsIDs}
               currency={this.state.USD ? 0 : this.state.EUR ? 1 : this.state.JPY ? 3 : 0}
-              removeItem={this.removeItem}
+              removeItem={this.removeFromCart}
               handleCartPage={this.handleCartPage}
               handleAddToTotalPrice={this.handleAddToTotalPrice}
               handleSubtractFromTotalPrice={this.handleSubtractFromTotalPrice}
-              resetTotalPrice={this.resetTotalPrice}
+              resetTotalPrice={this.clearTotalPrice}
               handleQuantity={this.handleQuantity}
               removeFromQuantity={this.removeFromQuantity}
               quantity={this.state.quantity}
