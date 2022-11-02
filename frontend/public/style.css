@@ -433,6 +433,50 @@ p {
   font-size: 24px;
   color: #8d8f9a;
 }
+.cart-page-container {
+  margin-top: 70px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 100px;
+}
+.cart-item-page-details {
+  width: 100%;
+}
+.cart-page-price-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.cart-page-price {
+  display: flex;
+  gap: 44px;
+}
+.cart-page-total-amount {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 24px;
+}
+.cart-page-text {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
+}
+.cart-page-options {
+  display: grid;
+  grid-template-columns: repeat(8, [col-start] 40px [col-end]);
+  row-gap: 8px;
+  column-gap: 8px;
+}
+.cart-page-light-text {
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+}
 
 @media (max-width: 400px) {
   .nav-label {
