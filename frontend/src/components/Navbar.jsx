@@ -69,7 +69,7 @@ export default class Navbar extends Component {
                   />
                 </svg>
               </button>
-              {this.props.currencyClicked && (
+              {this.props.notCartPage && this.props.currencyClicked && (
                 <div className="options-menu">
                   <button
                     className="option nav-label"
